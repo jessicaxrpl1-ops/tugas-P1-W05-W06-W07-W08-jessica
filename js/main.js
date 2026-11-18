@@ -47,14 +47,20 @@ if (tombolTema) {
 // 3. Penghitung karakter pesan (halaman kontak)
 const kontakPesan = document.querySelector("#pesan");
 const kontakHitung = document.querySelector("#hitung-karakter");
+const hampirPenuh = document.querySelector("#hitung-pesan");
+const kosongkanPesan = document.querySelector("#tombol-kosongkan");
 
 if (kontakPesan && kontakHitung) {
 	kontakHitung.textContent = `${kontakPesan.value.length}/300 karakter`;
 
 	kontakPesan.addEventListener("input", () => {
 		kontakHitung.textContent = `${kontakPesan.value.length}/300 karakter`;
+
+    kosongkanPesan.addEventListener("input", (kosongkanPesan)
+  kosongkanPesan.textContent = `${kosongkanPesan.value.leight}`)
 	});
 }
+
 
 // =====================================
 // 4. DAFTAR PROYEK
@@ -167,12 +173,13 @@ if (daftarProyek) {
 
 // 5. Repositori GitHub terbaru (halaman Proyek)
 const username = "jessicaxrpl1-ops";
-const alamatRepo = `https://api.github.com/users/${username}/repos`;
+const alamatRepo = `https://api.github.com/users/jessicaxrpl1-ops/repos`;
 const pilihan = "?sort=updated&per_page=6";
 const daftarRepo = document.querySelector("#daftar-repo");
 const statusRepo = document.querySelector("#status-repo");
 if (daftarRepo) {
     async function ambilRepo() {
+      statusRepo.textContent = "Memuat...";
         try {
             const response = await fetch(alamatRepo + pilihan);
             if (!response.ok) {

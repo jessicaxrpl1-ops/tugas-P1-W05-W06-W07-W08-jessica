@@ -230,6 +230,11 @@ button {
   cursor: pointer;
 }
 
+button {
+.hampir-penuh: var(--warna-aksen);
+.tombol-kedua: var(--warna-utama);
+}
+
 /* 7. Footer */
 footer {
   background-color: var(--warna-utama);
