@@ -47,20 +47,27 @@ if (tombolTema) {
 // 3. Penghitung karakter pesan (halaman kontak)
 const kontakPesan = document.querySelector("#pesan");
 const kontakHitung = document.querySelector("#hitung-karakter");
-const hampirPenuh = document.querySelector("#hitung-pesan");
 const kosongkanPesan = document.querySelector("#tombol-kosongkan");
 
-if (kontakPesan && kontakHitung) {
-	kontakHitung.textContent = `${kontakPesan.value.length}/300 karakter`;
+if (kontakPesan) {
+    const formKontak = kontakPesan.closest("form");
 
-	kontakPesan.addEventListener("input", () => {
-		kontakHitung.textContent = `${kontakPesan.value.length}/300 karakter`;
+    formKontak.addEventListener("reset", () => {
+        kontakHitung.textContent = "0/300 karakter";
+    });
 
-    kosongkanPesan.addEventListener("input", (kosongkanPesan)
-  kosongkanPesan.textContent = `${kosongkanPesan.value.leight}`)
-	});
+    kontakPesan.addEventListener("input", () => {
+        const panjangPesan = kontakPesan.value.length;
+
+        kontakHitung.textContent = `${panjangPesan}/300 karakter`;
+
+        if (panjangPesan > 250) {
+            kosongkanPesan.style.display = "inline-block";
+        } else {
+            kosongkanPesan.style.display = "inline-block";
+        }
+    });
 }
-
 
 // =====================================
 // 4. DAFTAR PROYEK
@@ -95,21 +102,21 @@ const proyek = [
     alt: "Portofolio responsif",
     deskripsi: "Website responsif menggunakan Flexbox.",
   },
-{
-  judul: "Kalkulator Nilai Rapor",
-  kategori: "JavaScript",
-  gambar: "img/proyek-nilai.png",
-  alt: "Tangkapan layar kalkulator nilai rapor",
-  deskripsi: "Rata-rata dan predikat nilai dengan fungsi JavaScript.",
-},
+  {
+    judul: "Kalkulator Nilai Rapor",
+    kategori: "JavaScript",
+    gambar: "img/proyek-nilai.png",
+    alt: "Tangkapan layar kalkulator nilai rapor",
+    deskripsi: "Rata-rata dan predikat nilai dengan fungsi JavaScript.",
+  },
 
-{
-  judul: "Lima Soal Logika",
-  kategori: "JavaScript",
-  gambar: "img/proyek-soal.png",
-  alt: "Tangkapan layar soal logika",
-  deskripsi: "Lima fungsi logika JavaScript.",
-},
+  {
+    judul: "Lima Soal Logika",
+    kategori: "JavaScript",
+    gambar: "img/proyek-soal.png",
+    alt: "Tangkapan layar soal logika",
+    deskripsi: "Lima fungsi logika JavaScript.",
+  },
 ];
 
 // =====================================
@@ -169,6 +176,7 @@ if (daftarProyek) {
   pasangFilter("#filter-semua", "Semua");
   pasangFilter("#filter-css", "CSS");
   pasangFilter("#filter-javascript", "JavaScript");
+  pasangFilter("#filter-html", "HTML");
 }
 
 // 5. Repositori GitHub terbaru (halaman Proyek)
@@ -178,34 +186,34 @@ const pilihan = "?sort=updated&per_page=6";
 const daftarRepo = document.querySelector("#daftar-repo");
 const statusRepo = document.querySelector("#status-repo");
 if (daftarRepo) {
-    async function ambilRepo() {
-      statusRepo.textContent = "Memuat...";
-        try {
-            const response = await fetch(alamatRepo + pilihan);
-            if (!response.ok) {
-                throw new Error(`GitHub mengembalikan status ${response.status}`);
-            }
+  async function ambilRepo() {
+    statusRepo.textContent = "Memuat...";
+    try {
+      const response = await fetch(alamatRepo + pilihan);
+      if (!response.ok) {
+        throw new Error(`GitHub mengembalikan status ${response.status}`);
+      }
 
-            const repos = await response.json();
-            repos.forEach((repo) => {
-                const item = document.createElement("li");
-                const tautan = document.createElement("a");
-                tautan.href = repo.html_url;
-                tautan.target = "_blank";
-                tautan.rel = "noopener noreferrer";
-                tautan.textContent = repo.name;
-                item.appendChild(tautan);
-                item.append(
-                  ` (${repo.language || "tanpa bahasa"}, ${repo.stargazers_count} bintang)`
-                );
-                daftarRepo.appendChild(item);
-            });
-            statusRepo.textContent = `${repos.length} repositori yang terakhir diperbarui:`;
-        } catch (error) {
-            statusRepo.textContent =  "Maaf, daftar repository tidak dapat dimuat. Periksa koneksi atau nama akun GitHub.";
-            console.error("Gagal memuat repositori GitHub:", error);
-        }
+      const repos = await response.json();
+      repos.forEach((repo) => {
+        const item = document.createElement("li");
+        const tautan = document.createElement("a");
+        tautan.href = repo.html_url;
+        tautan.target = "_blank";
+        tautan.rel = "noopener noreferrer";
+        tautan.textContent = repo.name;
+        item.appendChild(tautan);
+        item.append(
+          ` (${repo.language || "tanpa bahasa"}, ${repo.stargazers_count} bintang)`
+        );
+        daftarRepo.appendChild(item);
+      });
+      statusRepo.textContent = `${repos.length} repositori yang terakhir diperbarui:`;
+    } catch (error) {
+      statusRepo.textContent = "Maaf, daftar repository tidak dapat dimuat. Periksa koneksi atau nama akun GitHub.";
+      console.error("Gagal memuat repositori GitHub:", error);
     }
+  }
 
-    ambilRepo();
+  ambilRepo();
 }

@@ -38,7 +38,9 @@ body {
   background-color: var(--warna-latar);
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: "Poppins", Arial, sans-serif;
   color: var(--warna-judul);
   line-height: 1.3;
@@ -48,7 +50,9 @@ h2 {
   margin-bottom: 0.75rem;
 }
 
-p, ul, ol {
+p,
+ul,
+ol {
   margin-bottom: 1rem;
 }
 
@@ -189,7 +193,8 @@ caption {
   margin-bottom: 0.5rem;
 }
 
-th, td {
+th,
+td {
   border: 1px solid var(--warna-garis);
   padding: 0.5rem 0.75rem;
   text-align: left;
@@ -205,7 +210,9 @@ label {
   font-weight: 600;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   width: 100%;
   max-width: 22rem;
   padding: 0.6rem;
@@ -230,11 +237,20 @@ button {
   cursor: pointer;
 }
 
-button {
-.hampir-penuh: var(--warna-aksen);
-.tombol-kedua: var(--warna-utama);
+.tombol-kedua {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border-radius: 6px;
 }
 
+.tombol-kedua {
+  padding: 12px;
+  cursor: pointer;
+  text-align: center;
+  align-items: center;
+  border-radius: 6px
+}
 /* 7. Footer */
 footer {
   background-color: var(--warna-utama);
